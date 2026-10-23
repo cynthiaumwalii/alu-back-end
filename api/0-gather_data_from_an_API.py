@@ -6,26 +6,14 @@ import sys
 
 URL = "https://jsonplaceholder.typicode.com/users"
 
+user_id = sys.argv[1]
 
-def gather_data(user_id):
-    employee_data = requests.get(f"{URL}/{user_id}")
-    employee_name = employee_data.json()["name"]
-    response = requests.get(f"{URL}/{user_id}/todos")
-    data = response.json()
-    completed_count = 0
-    completed_tasks = []
-    total_tasks = len(data)
-    for item in data:
-        if item["completed"]:
-            completed_count += 1
-            completed_tasks.append(item["title"])
+employee_name = requests.get(f"{URL}/{user_id}").json()["name"]
+data = requests.get(f"{URL}/{user_id}/todos").json()
 
-    print(f"Employee {employee_name} is done with tasks"
-          f"({completed_count}/{total_tasks}):")
-    for compl_itm in completed_tasks:
-        print(f"\t {compl_itm}")
+completed_tasks = [item["title"] for item in data if item["completed"]]
 
-
-if __name__ == "__main__":
-    user_id = int(sys.argv[1]) if len(sys.argv) > 1 else 1
-    gather_data(user_id)
+print(f"Employee {employee_name} is done with tasks"
+      f"({len(completed_tasks)}/{len(data)}):")
+for title in completed_tasks:
+    print(f"\t {title}")
