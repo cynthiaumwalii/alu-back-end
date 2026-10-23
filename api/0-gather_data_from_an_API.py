@@ -1,8 +1,11 @@
 #!/usr/bin/python3
+"""Gather an employee's TODO progress from a REST API."""
 
 import requests
+import sys
 
 URL = "https://jsonplaceholder.typicode.com/users"
+
 
 def gather_data(user_id):
     employee_data = requests.get(f"{URL}/{user_id}")
@@ -17,8 +20,11 @@ def gather_data(user_id):
             completed_count += 1
             completed_tasks.append(item["title"])
 
-    print(f"Employee {employee_name} is done with tasks({completed_count}/{total_tasks}):")
+    print(f"Employee {employee_name} is done with tasks"
+          f"({completed_count}/{total_tasks}):")
     for compl_itm in completed_tasks:
-        print(f"\t{compl_itm}")
+        print(f"\t {compl_itm}")
 
-gather_data(2)
+
+if __name__ == "__main__":
+    gather_data(int(sys.argv[1]))
