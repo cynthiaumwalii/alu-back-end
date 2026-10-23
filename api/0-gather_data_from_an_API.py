@@ -1,3 +1,5 @@
+#!/usr/bin/python3
+
 import requests
 
 URL = "https://jsonplaceholder.typicode.com/users"
