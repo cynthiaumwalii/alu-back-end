@@ -17,8 +17,8 @@ def gather_data(user_id):
             completed_count += 1
             completed_tasks.append(item["title"])
 
-    print(f"Employee {employee_name} is done with {completed_count}/{total_tasks}")
+    print(f"Employee {employee_name} is done with tasks({completed_count}/{total_tasks}):")
     for compl_itm in completed_tasks:
         print(f"\t{compl_itm}")
 
-gather_data(1)
+gather_data(2)
