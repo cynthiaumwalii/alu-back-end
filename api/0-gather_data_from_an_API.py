@@ -27,4 +27,5 @@ def gather_data(user_id):
 
 
 if __name__ == "__main__":
-    gather_data(int(sys.argv[1]))
+    user_id = int(sys.argv[1]) if len(sys.argv) > 1 else 1
+    gather_data(user_id)
